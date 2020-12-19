@@ -5,8 +5,8 @@ package info.kfgodel.aoc
  * It's either an empty seat, occupied seat, or plain floor
  * Date: 19/12/20 - 19:54
  */
-enum class SpaceType {
-    FLOOR,
-    EMPTY_SEAT,
-    OCCUPIED_SEAT
+enum class SpaceType(val charRepresentation: Char) {
+    FLOOR('.'),
+    EMPTY_SEAT('L'),
+    OCCUPIED_SEAT('#')
 }

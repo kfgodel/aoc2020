@@ -13,7 +13,6 @@ import org.junit.runner.RunWith
 class SeatingStateTest : KotlinSpec() {
     override fun define() {
         describe("a seating state") {
-            val state by let { SeatingState() }
 
             describe("created from text") {
                 val text by let { "" }
@@ -27,7 +26,7 @@ class SeatingStateTest : KotlinSpec() {
                 it("validates characters in the text") {
                     assertThatThrownBy {
                         stateFrom("a")
-                    }.hasMessage("Invalid character found in text. Only 'L': empty seat, '#': occupied seat, or '.': floor are expected")
+                    }.hasMessage("Invalid character found in text at position 0: 'a'. Only 'L': empty seat, '#': occupied seat, or '.': floor are expected")
                 }
                 it("validates the text represents a rectangular space") {
                     assertThatThrownBy {
@@ -36,7 +35,7 @@ class SeatingStateTest : KotlinSpec() {
                             "LLLL\n" +
                             "LLL"
                         )
-                    }.hasMessage("The input text should represent a rectangular space using lines of same length. Length of first line: 3")
+                    }.hasMessage("The input text should represent a rectangular space using lines of same length. Length of first line: 3. Invalid length at position: 8")
                 }
 
                 it("counts 0 occupied seats if only floor or empty seats are used") {
