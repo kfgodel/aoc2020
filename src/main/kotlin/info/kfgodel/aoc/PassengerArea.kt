@@ -4,14 +4,14 @@ package info.kfgodel.aoc
  * This class represent a possible state for all the plane space
  * Date: 19/12/20 - 18:39
  */
-class SeatingState(val spaces: Array<SpaceType>, val columnsPerRow: Int) {
+class PassengerArea(val spaces: Array<SpaceType>, val columnsPerRow: Int) {
     fun occupiedSeatCount(): Int {
         return spaces.count { space -> SpaceType.OCCUPIED_SEAT.equals(space) }
     }
 
 }
 
-fun stateFrom(text: String): SeatingState {
+fun areaFrom(text: String): PassengerArea {
     if (text.isEmpty()) {
         throw IllegalArgumentException("Seating state cannot be created from an empty string")
     }
@@ -41,5 +41,5 @@ fun stateFrom(text: String): SeatingState {
             }
         }
     }
-    return SeatingState(spaces.toTypedArray(), charactersPerLine-1)
+    return PassengerArea(spaces.toTypedArray(), charactersPerLine-1)
 }

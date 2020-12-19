@@ -10,27 +10,27 @@ import org.junit.runner.RunWith
  * Based on https://adventofcode.com/2020/day/11
  */
 @RunWith(JavaSpecRunner::class)
-class SeatingStateTest : KotlinSpec() {
+class PassengerAreaTest : KotlinSpec() {
     override fun define() {
-        describe("a seating state") {
+        describe("a passenger area") {
 
             describe("created from text") {
                 val text by let { "" }
-                val state by let { stateFrom(text()) }
+                val state by let { areaFrom(text()) }
 
                 it("validates text is not empty") {
                     assertThatThrownBy {
-                        stateFrom(text())
+                        areaFrom(text())
                     }.hasMessage("Seating state cannot be created from an empty string")
                 }
-                it("validates characters in the text") {
+                it("validates characters in the text are one of teh expected") {
                     assertThatThrownBy {
-                        stateFrom("a")
+                        areaFrom("a")
                     }.hasMessage("Invalid character found in text at position 0: 'a'. Only 'L': empty seat, '#': occupied seat, or '.': floor are expected")
                 }
                 it("validates the text represents a rectangular space") {
                     assertThatThrownBy {
-                        stateFrom(
+                        areaFrom(
                             "LLL\n" +
                             "LLLL\n" +
                             "LLL"

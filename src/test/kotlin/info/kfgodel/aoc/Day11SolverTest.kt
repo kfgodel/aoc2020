@@ -15,7 +15,7 @@ class Day11SolverTest : KotlinSpec() {
       val solver by let { Day11Solver() }
 
       it("answers the amount of occupied seats after stabilization for the given initial state") {
-        val finalState = solver().solve(stateFrom(
+        val finalState = solver().solve(areaFrom(
           "L.LL.LL.LL\n" +
           "LLLLLLL.LL\n" +
           "L.L.L..L..\n" +
