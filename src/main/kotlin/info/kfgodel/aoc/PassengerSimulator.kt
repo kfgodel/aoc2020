@@ -17,8 +17,8 @@ class PassengerSimulator(private var currentState: PassengerArea) {
             val nextSpace = currentSpace.calculateChangeOn(currentCursor)
             if(currentSpace != nextSpace){
                 stateChanged = true
-                nextCursor.changeSpaceTo(nextSpace)
             }
+            nextCursor.changeSpaceTo(nextSpace)
             currentCursor.advance().also { nextCursor.advance() }
         }
         if(stateChanged){

@@ -91,6 +91,138 @@ class PassengerSimulatorTest : KotlinSpec() {
 
         }
 
+        describe("based on problem examples") {
+          it("correctly calculates the 2nd round") {
+            initialState { areaFrom(
+              "L.LL.LL.LL\n" +
+              "LLLLLLL.LL\n" +
+              "L.L.L..L..\n" +
+              "LLLL.LL.LL\n" +
+              "L.LL.LL.LL\n" +
+              "L.LLLLL.LL\n" +
+              "..L.L.....\n" +
+              "LLLLLLLLLL\n" +
+              "L.LLLLLL.L\n" +
+              "L.LLLLL.LL"
+            )}
+            assertThat(nextState().representation()).isEqualTo(
+              "#.##.##.##\n" +
+              "#######.##\n" +
+              "#.#.#..#..\n" +
+              "####.##.##\n" +
+              "#.##.##.##\n" +
+              "#.#####.##\n" +
+              "..#.#.....\n" +
+              "##########\n" +
+              "#.######.#\n" +
+              "#.#####.##"
+            )
+          }
+          it("correctly calculates the 3rd round") {
+            initialState { areaFrom(
+              "#.##.##.##\n" +
+              "#######.##\n" +
+              "#.#.#..#..\n" +
+              "####.##.##\n" +
+              "#.##.##.##\n" +
+              "#.#####.##\n" +
+              "..#.#.....\n" +
+              "##########\n" +
+              "#.######.#\n" +
+              "#.#####.##"
+            )}
+            assertThat(nextState().representation()).isEqualTo(
+              "#.LL.L#.##\n" +
+              "#LLLLLL.L#\n" +
+              "L.L.L..L..\n" +
+              "#LLL.LL.L#\n" +
+              "#.LL.LL.LL\n" +
+              "#.LLLL#.##\n" +
+              "..L.L.....\n" +
+              "#LLLLLLLL#\n" +
+              "#.LLLLLL.L\n" +
+              "#.#LLLL.##"
+            )
+          }
+          it("correctly calculates the 4th round") {
+            initialState { areaFrom(
+              "#.LL.L#.##\n" +
+              "#LLLLLL.L#\n" +
+              "L.L.L..L..\n" +
+              "#LLL.LL.L#\n" +
+              "#.LL.LL.LL\n" +
+              "#.LLLL#.##\n" +
+              "..L.L.....\n" +
+              "#LLLLLLLL#\n" +
+              "#.LLLLLL.L\n" +
+              "#.#LLLL.##"
+            )}
+            assertThat(nextState().representation()).isEqualTo(
+              "#.##.L#.##\n" +
+              "#L###LL.L#\n" +
+              "L.#.#..#..\n" +
+              "#L##.##.L#\n" +
+              "#.##.LL.LL\n" +
+              "#.###L#.##\n" +
+              "..#.#.....\n" +
+              "#L######L#\n" +
+              "#.LL###L.L\n" +
+              "#.#L###.##"
+            )
+          }
+          it("correctly calculates the 5th round") {
+            initialState { areaFrom(
+              "#.##.L#.##\n" +
+              "#L###LL.L#\n" +
+              "L.#.#..#..\n" +
+              "#L##.##.L#\n" +
+              "#.##.LL.LL\n" +
+              "#.###L#.##\n" +
+              "..#.#.....\n" +
+              "#L######L#\n" +
+              "#.LL###L.L\n" +
+              "#.#L###.##"
+            )}
+            assertThat(nextState().representation()).isEqualTo(
+              "#.#L.L#.##\n" +
+              "#LLL#LL.L#\n" +
+              "L.L.L..#..\n" +
+              "#LLL.##.L#\n" +
+              "#.LL.LL.LL\n" +
+              "#.LL#L#.##\n" +
+              "..L.L.....\n" +
+              "#L#LLLL#L#\n" +
+              "#.LLLLLL.L\n" +
+              "#.#L#L#.##"
+            )
+          }
+          it("correctly calculates the 6th round") {
+            initialState { areaFrom(
+              "#.#L.L#.##\n" +
+              "#LLL#LL.L#\n" +
+              "L.L.L..#..\n" +
+              "#LLL.##.L#\n" +
+              "#.LL.LL.LL\n" +
+              "#.LL#L#.##\n" +
+              "..L.L.....\n" +
+              "#L#LLLL#L#\n" +
+              "#.LLLLLL.L\n" +
+              "#.#L#L#.##"
+            )}
+            assertThat(nextState().representation()).isEqualTo(
+              "#.#L.L#.##\n" +
+              "#LLL#LL.L#\n" +
+              "L.#.L..#..\n" +
+              "#L##.##.L#\n" +
+              "#.#L.LL.LL\n" +
+              "#.#L#L#.##\n" +
+              "..L.L.....\n" +
+              "#L#L##L#L#\n" +
+              "#.LLLLLL.L\n" +
+              "#.#L#L#.##"
+            )
+          }
+        }
       }
 
 
