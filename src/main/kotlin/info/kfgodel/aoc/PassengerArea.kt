@@ -4,9 +4,39 @@ package info.kfgodel.aoc
  * This class represent a possible state for all the plane space
  * Date: 19/12/20 - 18:39
  */
-class PassengerArea(val spaces: Array<SpaceType>, val columnsPerRow: Int) {
+class PassengerArea(val spaces: Array<SpaceType>, private val columnsPerRow: Int) {
+
     fun occupiedSeatCount(): Int {
         return spaces.count { space -> SpaceType.OCCUPIED_SEAT.equals(space) }
+    }
+
+    /**
+     * Returns a string representation for this area
+     */
+    fun representation(): String {
+        val builder = StringBuilder()
+        for (i in spaces.indices) {
+            if (i != 0 && i % columnsPerRow == 0) {
+                builder.append('\n')
+            }
+            builder.append(spaces[i].charRepresentation)
+        }
+        return builder.toString()
+    }
+
+    /**
+     * Creates an exact deep copy that can be mutated without affecting this instance
+     */
+    fun copy(): PassengerArea {
+        return PassengerArea(spaces.copyOf(), columnsPerRow)
+    }
+
+    override fun toString(): String {
+        return this.representation()
+    }
+
+    fun createCursor(): AreaCursor {
+        return AreaCursor(this)
     }
 
 }
@@ -22,9 +52,9 @@ fun areaFrom(text: String): PassengerArea {
         when (character) {
             '\n' -> { // ending a row
                 if (charactersPerLine == 0) { // this is the first row, use it to set the expected columns per row
-                    charactersPerLine = i+1 // i is 0-based
-                } else if ((i+1) % charactersPerLine != 0) { // Let's check that all rows are equal
-                    throw IllegalArgumentException("The input text should represent a rectangular space using lines of same length. Length of first line: ${charactersPerLine-1}. Invalid length at position: $i")
+                    charactersPerLine = i + 1 // i is 0-based
+                } else if ((i + 1) % charactersPerLine != 0) { // Let's check that all rows are equal
+                    throw IllegalArgumentException("The input text should represent a rectangular space using lines of same length. Length of first line: ${charactersPerLine - 1}. Invalid length at position: $i")
                 }
             }
             SpaceType.FLOOR.charRepresentation -> {
@@ -41,5 +71,5 @@ fun areaFrom(text: String): PassengerArea {
             }
         }
     }
-    return PassengerArea(spaces.toTypedArray(), charactersPerLine-1)
+    return PassengerArea(spaces.toTypedArray(), charactersPerLine - 1)
 }

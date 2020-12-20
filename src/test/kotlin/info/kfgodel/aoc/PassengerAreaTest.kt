@@ -57,6 +57,25 @@ class PassengerAreaTest : KotlinSpec() {
                 }
 
             }
+
+            it("has a string representation like the problem examples"){
+                val area = PassengerArea(
+                    arrayOf(
+                        SpaceType.FLOOR, SpaceType.EMPTY_SEAT,
+                        SpaceType.FLOOR, SpaceType.OCCUPIED_SEAT
+                    ), 2
+                )
+                assertThat(area.representation()).isEqualTo(".L\n.#")
+            }
+
+            it("can be copied into a new area") {
+                val area = PassengerArea(
+                    arrayOf(
+                        SpaceType.EMPTY_SEAT, SpaceType.OCCUPIED_SEAT
+                    ), 1
+                )
+                assertThat(area.copy().representation()).isEqualTo("L\n#")
+            }
         }
     }
 }

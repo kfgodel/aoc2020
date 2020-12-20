@@ -7,6 +7,26 @@ package info.kfgodel.aoc
  */
 enum class SpaceType(val charRepresentation: Char) {
     FLOOR('.'),
-    EMPTY_SEAT('L'),
-    OCCUPIED_SEAT('#')
+    EMPTY_SEAT('L') {
+        override fun calculateChangeOn(cursor: AreaCursor): SpaceType {
+            val adjacentOccupied = cursor.countOccupiedAdjacent()
+            if(adjacentOccupied == 0){
+                return OCCUPIED_SEAT
+            }
+            return super.calculateChangeOn(cursor)
+        }
+    },
+    OCCUPIED_SEAT('#') {
+        override fun calculateChangeOn(cursor: AreaCursor): SpaceType {
+            val adjacentOccupied = cursor.countOccupiedAdjacent()
+            if(adjacentOccupied >= 4){
+                return EMPTY_SEAT
+            }
+            return super.calculateChangeOn(cursor)
+        }
+    };
+
+    open fun calculateChangeOn(cursor: AreaCursor): SpaceType {
+        return this // By default, any space doesn't change
+    }
 }
