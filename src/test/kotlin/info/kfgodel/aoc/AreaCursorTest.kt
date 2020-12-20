@@ -79,17 +79,39 @@ class AreaCursorTest : KotlinSpec() {
                     )
                 }
 
-                it("considers the 8 spaces around the current one") {
-                    cursor().advance(4)
-                    assertThat(counted()).isEqualTo(5)
-                }
-                it("ignores spaces outside the area in the corners") {
+                it("ignores unreachable spaces for the top left corner") {
                     assertThat(counted()).isEqualTo(1)
+                }
+                it("ignores unreachable spaces for the top middle border") {
+                    cursor().advance(1)
+                    assertThat(counted()).isEqualTo(3)
+                }
+                it("ignores unreachable spaces for the top right corner") {
                     cursor().advance(2)
                     assertThat(counted()).isEqualTo(0)
+                }
+                it("ignores unreachable spaces for the middle left border") {
+                    cursor().advance(3)
+                    assertThat(counted()).isEqualTo(3)
+                }
+                it("considers all the 8 spaces around a middle possition") {
                     cursor().advance(4)
+                    assertThat(counted()).isEqualTo(6)
+                }
+                it("ignores unreachable spaces for the middle right border") {
+                    cursor().advance(5)
+                    assertThat(counted()).isEqualTo(3)
+                }
+                it("ignores unreachable spaces for the bottom left corner") {
+                    cursor().advance(6)
                     assertThat(counted()).isEqualTo(2)
-                    cursor().advance(2)
+                }
+                it("ignores unreachable spaces for the bottom middle corner") {
+                    cursor().advance(7)
+                    assertThat(counted()).isEqualTo(3)
+                }
+                it("ignores unreachable spaces for the bottom right corner") {
+                    cursor().advance(8)
                     assertThat(counted()).isEqualTo(1)
                 }
 

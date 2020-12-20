@@ -9,6 +9,11 @@ import java.lang.IllegalStateException
  */
 class AreaCursor(private val area: PassengerArea) {
     var currentPosition = 0
+    val relativeAdjacentPositions = arrayOf(
+        -area.columnsPerRow - 1, -area.columnsPerRow, -area.columnsPerRow + 1,
+        -1, +1,
+        +area.columnsPerRow -1, area.columnsPerRow, area.columnsPerRow +1
+    )
 
     fun hasSpace(): Boolean {
         return currentPosition < area.spaces.size
@@ -40,6 +45,43 @@ class AreaCursor(private val area: PassengerArea) {
     }
 
     fun countOccupiedAdjacent(): Int {
-        TODO("Not yet implemented")
+        var occupiedCount = 0
+        for(i in relativeAdjacentPositions.indices){
+            if(adjacentWillFallOutsideHorizontalArea(i)){
+                // Skip a space that is out of the left or right area limits
+                continue
+            }
+            val adjacentPosition = relativeAdjacentPositions[i] + currentPosition
+            if (adjacentWillFallOutsideVerticalArea(adjacentPosition)) {
+                // Skip adjacent that is above or below the area
+                continue
+            }
+            val adjacentSpace = area.spaces[adjacentPosition]
+            if(adjacentSpace == SpaceType.OCCUPIED_SEAT){
+                occupiedCount++
+            }
+        }
+        return occupiedCount
     }
+
+    private fun adjacentWillFallOutsideVerticalArea(adjacentPosition: Int) =
+        adjacentPosition < 0 || adjacentPosition >= area.spaces.size
+
+    private fun adjacentWillFallOutsideHorizontalArea(relativeIndex: Int): Boolean {
+        val columnIndex = currentPosition % area.columnsPerRow
+        if(columnIndex == 0){ // We are on the leftmost spaces
+            // Spaces to the left of the current will fall outside the area
+            if(relativeIndex == 0 || relativeIndex == 3 || relativeIndex == 5){
+                return true
+            }
+        }
+        if(columnIndex == (area.columnsPerRow-1)){ // We are on the rightmost spaces
+            // Spaces to the right of the current will fall outside the area
+            if(relativeIndex == 2 || relativeIndex == 4 || relativeIndex == 7){
+                return true
+            }
+        }
+        return false
+    }
+
 }

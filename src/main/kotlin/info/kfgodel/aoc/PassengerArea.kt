@@ -4,7 +4,7 @@ package info.kfgodel.aoc
  * This class represent a possible state for all the plane space
  * Date: 19/12/20 - 18:39
  */
-class PassengerArea(val spaces: Array<SpaceType>, private val columnsPerRow: Int) {
+class PassengerArea(val spaces: Array<SpaceType>, val columnsPerRow: Int) {
 
     fun occupiedSeatCount(): Int {
         return spaces.count { space -> SpaceType.OCCUPIED_SEAT.equals(space) }
